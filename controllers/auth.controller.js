@@ -38,7 +38,8 @@ export const login = async (req, res) => {
         const token = await accessToken({ id: userFound._id });
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
+            secure: true,
+            sameSite: 'none',
             maxAge: 24 * 60 * 60 * 1000,
             domain: process.env.COOKIE_DOMAIN,
             path: '/'
